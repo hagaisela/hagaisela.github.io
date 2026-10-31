@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "tonesmith.app",
+    "sha256_cert_host_fingerprints": [
+      "2A:DE:34:1A:C4:D8:1B:46:29:7D:8F:0A:A0:60:15:97:DB:03:BC:6B:C9:C1:36:59:DB:C4:B9:4E:5B:C5:BA:16"
+    ]
+  }
+}]
