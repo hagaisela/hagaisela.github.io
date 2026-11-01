@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Send to ToneSmith</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 1rem;
+    font: 16px/1.5 system-ui, sans-serif; text-align: center; padding: 1.5rem;
+    background: #f6f7fb; color: #191f2c;
+  }
+  @media (prefers-color-scheme: dark) { body { background: #191f2c; color: #f6f7fb; } a { color: #9fa4ff; } }
+  h1 { font-size: 1.25rem; margin: 0; }
+  p { margin: 0; max-width: 30rem; }
+  #open {
+    display: inline-block; padding: 0.75rem 1.5rem; border-radius: 999px;
+    background: #4f54d8; color: #fff; text-decoration: none; font-weight: 600;
+  }
+  #open:active { opacity: 0.85; }
+  .hint { opacity: 0.75; font-size: 0.875rem; }
+</style>
+</head>
+<body>
+<h1>Send to ToneSmith</h1>
+<p id="status">Opening the app…</p>
+<a id="open" href="tonesmith://tone">Open ToneSmith</a>
+<p class="hint">If nothing happens, tap the button above. ToneSmith must be installed on
+this device; the tone request rides inside the link — nothing is loaded from this page.</p>
+<script>
+(function () {
+  var spec = new URLSearchParams(location.search).get('spec');
+  var link = document.getElementById('open');
+  var status = document.getElementById('status');
+  if (!spec) {
+    status.textContent = 'This link carries no tone request (no spec parameter).';
+    link.parentNode.removeChild(link);
+    return;
+  }
+  // The persona percent-encodes the spec once; URLSearchParams decodes it on read,
+  // so re-encode with encodeURIComponent (the exact form the app's ToneLink expects)
+  // before handing it to the custom scheme.
+  var appUrl = 'tonesmith://tone?spec=' + encodeURIComponent(spec);
+  link.href = appUrl;
+  location.replace(appUrl);
+})();
+</script>
+</body>
+</html>

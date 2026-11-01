@@ -40,3 +40,10 @@ would un-verify every debug build the moment the push publishes.
 
 Verify the live file after any change:
 `curl -s https://hagaisela.github.io/.well-known/assetlinks.json`
+
+## /tone — the browser bridge
+
+`/tone` is a fallback page for devices where the App Link is not (yet) verified: it
+forwards the `spec` parameter of `https://hagaisela.github.io/tone?spec=…` to the app's
+`tonesmith://tone` custom scheme via a redirect plus a manual button. Once Android
+verifies the App Link, the system opens the app directly and this page is rarely seen.
